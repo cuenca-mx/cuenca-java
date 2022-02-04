@@ -9,7 +9,6 @@ import java.util.Base64;
 public class CuencaClient {
     private String apiKeyId;
     private String apiSecret;
-    private String loginID = "";
     private HttpClient client;
 
     public CuencaClient(String apiKeyId, String apiSecret) {

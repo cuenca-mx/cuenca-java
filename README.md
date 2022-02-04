@@ -51,3 +51,41 @@ dependencies {
   import com.cuenca.CuencaClient;
 ```
 
+#Metodos disponibles
+1. GET
+ ```
+Parametros: 
+ endpoint: URL del endPoint
+Retorno:
+  Regresa un HttpResponse en formato string. 
+public HttpResponse<String> get(String endpoint)
+```
+
+2. POST
+```
+Parametros:
+endpoint: URL del endPoint
+body: Cuerpo de la petición en formato JSON
+Retorno:
+Regresa un HttpResponse en formato string.
+public HttpResponse<String> post(String endpoint, String body)
+```
+
+4. PATCH
+```
+Parametros:
+endpoint: URL del endPoint
+body: Cuerpo de la petición en formato JSON
+Retorno:
+Regresa un HttpResponse en formato string.
+public HttpResponse<String> patch(String endpoint, String body)
+```
+
+6. DELETE
+```
+Parametros:
+endpoint: URL del endPoint
+Retorno:
+Regresa un HttpResponse en formato string.
+public HttpResponse<String> delete(String endpoint)
+```
