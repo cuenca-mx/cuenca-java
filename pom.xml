@@ -6,7 +6,11 @@
 
     <groupId>com.cuenca</groupId>
     <artifactId>CuencaJava</artifactId>
+    <packaging>pom</packaging>
     <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>example</module>
+    </modules>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>
