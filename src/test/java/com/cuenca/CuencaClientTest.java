@@ -9,7 +9,6 @@ import java.net.http.HttpClient;
 import java.net.http.HttpHeaders;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
-import java.util.Base64;
 import java.util.Optional;
 
 import static org.mockito.Mockito.mock;
