@@ -14,6 +14,7 @@ public class CuencaClient {
     public CuencaClient(String apiKeyId, String apiSecret) {
         this.apiKeyId = apiKeyId;
         this.apiSecret = apiSecret;
+        if (client == null) this.client = HttpClient.newBuilder().build();
     }
 
     public CuencaClient(String apiKeyId, String apiSecret, HttpClient client) {
@@ -29,6 +30,9 @@ public class CuencaClient {
     public HttpResponse<String> get(String endpoint) throws Exception {
         return request("GET", endpoint, "");
     }
+    public HttpResponse<String> get(String endpoint, String body) throws Exception {
+        return request("GET", endpoint, body);
+    }
 
     public HttpResponse<String> patch(String endpoint, String body) throws Exception {
         return request("PATCH", endpoint, body);
@@ -38,9 +42,11 @@ public class CuencaClient {
         return request("DELETE", endpoint, "");
     }
 
+    public HttpResponse<String> delete(String endpoint, String body) throws Exception {
+        return request("DELETE", endpoint, body);
+    }
+
     private HttpResponse<String> request(String method, String endpoint, String body) throws Exception {
-        if (client == null)
-            this.client = HttpClient.newBuilder().build();
         HttpRequest.BodyPublisher jsonPayload = HttpRequest.BodyPublishers.ofString(body);
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(URI.create(endpoint))
@@ -55,7 +61,6 @@ public class CuencaClient {
     private String getAuthHeader() {
         String plainCredentials = apiKeyId + ":" + apiSecret;
         String base64Credentials = new String(Base64.getEncoder().encode(plainCredentials.getBytes()));
-        String authorizationHeader = "Basic " + base64Credentials;
-        return authorizationHeader;
+        return  "Basic " + base64Credentials;
     }
 }

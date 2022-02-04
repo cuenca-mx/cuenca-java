@@ -1,11 +1,12 @@
 # Cuenca-Java
 
 
-## Instalación
+## Install
 
 #Gradle
 
-1. Agregue el repositorio de JitPack a su archivo de compilación
+1. Add the JitPack repository to your build file. Add it in your root build.gradle at the end of repositories:
+
   ```
   allprojects {
 		repositories {
@@ -13,22 +14,22 @@
 		}
 	}
  ```
-2.Agrega la dependencia 
+2. Add the dependency
 
 ```
 dependencies {
 	        implementation 'com.github.cuenca-mx:cuenca-java:v1.0'
 	}
 ```
-3. Indica a tu proyecto que debe leer los cambios realizados en el archivo maven "Load gradle changes"
-4. Importa el paquete a tu proyecto con 
+3. Load the changes made in the maven "Load gradle changes" file
+4. Import the package to your project with
  ```
   import com.cuenca.CuencaClient;
 ```
 
 #Maven
 
-1. Agregue el repositorio de JitPack a su archivo de compilación
+1. Add the JitPack repository to your build file
 ```
 <repositories>
 		<repository>
@@ -37,7 +38,7 @@ dependencies {
 		</repository>
 	</repositories>
 ```
-2. Agrega la dependencia
+2. Add the dependency
 ```
 <dependency>
 	    <groupId>com.github.cuenca-mx</groupId>
@@ -45,47 +46,49 @@ dependencies {
 	    <version>v1.0</version>
 	</dependency>
 ```
-3. Indica a tu proyecto que debe leer los cambios realizados en el archivo maven "Load maven changes"
-4. Importa el paquete a tu proyecto con 
+3. Load the changes made in the maven "Load maven changes" file
+4. Import the package to your project with
  ```
   import com.cuenca.CuencaClient;
 ```
 
-#Metodos disponibles
+Available methods
 1. GET
  ```
-Parametros: 
- endpoint: URL del endPoint
-Retorno:
-  Regresa un HttpResponse en formato string. 
+Params: 
+ endpoint: Endpoint URL
+body (Optional): Request body in JSON format
+Return:
+Returns an HttpResponse in string format.
 public HttpResponse<String> get(String endpoint)
 ```
 
 2. POST
 ```
-Parametros:
-endpoint: URL del endPoint
-body: Cuerpo de la petición en formato JSON
-Retorno:
-Regresa un HttpResponse en formato string.
+Params:
+endpoint: Endpoint URL
+body: Request body in JSON format
+Return:
+Returns an HttpResponse in string format.
 public HttpResponse<String> post(String endpoint, String body)
 ```
 
 4. PATCH
 ```
-Parametros:
-endpoint: URL del endPoint
-body: Cuerpo de la petición en formato JSON
-Retorno:
-Regresa un HttpResponse en formato string.
+Params:
+endpoint: Endpoint URL
+body: Request body in JSON format
+Return:
+Returns an HttpResponse in string format.
 public HttpResponse<String> patch(String endpoint, String body)
 ```
 
 6. DELETE
 ```
-Parametros:
-endpoint: URL del endPoint
+Params:
+endpoint:  Endpoint URL
+body (Optional): Request body in JSON format
 Retorno:
-Regresa un HttpResponse en formato string.
+Returns an HttpResponse in string format.
 public HttpResponse<String> delete(String endpoint)
 ```
