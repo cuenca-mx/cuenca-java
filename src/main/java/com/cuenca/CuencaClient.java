@@ -66,4 +66,5 @@ public class CuencaClient {
         String base64Credentials = new String(Base64.getEncoder().encode(plainCredentials.getBytes()));
         return  "Basic " + base64Credentials;
     }
+
 }
