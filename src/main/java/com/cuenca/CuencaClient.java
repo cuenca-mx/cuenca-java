@@ -60,7 +60,6 @@ public class CuencaClient {
         return response;
     }
 
-
     private String getAuthHeader() {
         String plainCredentials = apiKeyId + ":" + apiSecret;
         String base64Credentials = new String(Base64.getEncoder().encode(plainCredentials.getBytes()));
