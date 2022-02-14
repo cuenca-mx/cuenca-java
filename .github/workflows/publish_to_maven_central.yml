@@ -69,8 +69,8 @@ jobs:
       - name: Import GPG Key
         uses: crazy-max/ghaction-import-gpg@v4
         with:
-          gpg_private_key: ${{secrets.OSSRH_GPG_SECRET_KEY}}
-          passphrase: ${{secrets.OSSRH_GPG_SECRET_KEY_PASSWORD}}
+          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
       - name: Publish to Maven Central
         run: |
