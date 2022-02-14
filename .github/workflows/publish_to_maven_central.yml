@@ -63,11 +63,11 @@ jobs:
           key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - id: install-secret-key
-        name: Install gpg secret key
-        run: |
-          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
+      - name: Configure GPG Key
+        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" gpg --batch --import
+
+      - name: List keys
+        run: gpg -K
 
       - name: Publish to Maven Central
         run: |
