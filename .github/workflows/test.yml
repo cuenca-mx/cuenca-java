@@ -7,8 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  build:
-
+  test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -23,4 +22,3 @@ jobs:
           cache: maven
       - name: Test with Maven simple
         run: mvn -B test
-
