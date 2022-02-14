@@ -58,13 +58,15 @@ jobs:
           gpg-private-key: OSSRH_GPG_SECRET_KEY
           gpg-passphrase: OSSRH_GPG_SECRET_KEY_PASSWORD
 
-
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
+
+      - name: Configure GPG Key
+        run: echo "$OSSRH_GPG_SECRET_KEY" gpg --batch --import
 
       - name: Get lastest version and update based on previous commits
         run: ./bump_version.sh
