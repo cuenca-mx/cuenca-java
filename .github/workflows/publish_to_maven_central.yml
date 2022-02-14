@@ -21,7 +21,7 @@ jobs:
       - name: Set up Java with Maven
         uses: actions/setup-java@v2
         with:
-          java-version: ${{matrix.java-version}}
+          java-version: ${{ matrix.java-version}}
           distribution: 'adopt'
 
       - name: Cache Maven dependencies
@@ -37,51 +37,3 @@ jobs:
           mvn \
           --batch-mode \
           clean test
-
-  publish:
-    needs: test
-    name: Bump maven version, release on Github and Maven Central
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: 0
-
-      - name: Set up Java with Maven
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-          server-id: ossrh
-          server-username: MAVEN_USER_NAME
-          server-password: MAVEN_PASSWORD
-
-      - name: Cache Maven dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Install GPG secret key
-        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
-
-      - name: Get lastest version and update based on previous commits
-        working-directory: 'string-array-utils'
-        run: ./bump_version.sh
-
-      - name: Publish to Maven Central
-        working-directory: 'string-array-utils'
-        run: |
-          mvn \
-          --no-transfer-progress \
-          --batch-mode \
-          -Dgpg.passphrase-${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
-          -DskipTests \
-          -Prelease \
-          deploy
-        env:
-          MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
-
