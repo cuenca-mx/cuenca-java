@@ -64,7 +64,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Install GPG secret key
-        run: echo ${{ secrets.OSSRH_GPG_SECRET_KEY }} | gpg --batch --import
+        run: echo OSSRH_GPG_SECRET_KEY | gpg --batch --import
 
       - name: Get lastest version and update based on previous commits
         run: ./bump_version.sh
@@ -74,12 +74,15 @@ jobs:
           mvn \
           --no-transfer-progress \
           --batch-mode \
-          -Dgpg.passphrase-${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }} \
+          -Dgpg.passphrase-OSSRH_GPG_SECRET_KEY_PASSWORD \
           -DskipTests \
           -Prelease \
           deploy
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
+          OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
 
 
