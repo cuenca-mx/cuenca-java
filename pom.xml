@@ -6,7 +6,7 @@
 
     <groupId>com.cuenca</groupId>
     <artifactId>CuencaJava</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>CuencaJava</name>
     <description>Library to connect to Cuenca</description>

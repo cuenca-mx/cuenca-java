@@ -66,9 +66,6 @@ jobs:
       - name: Configure GPG Key
         run: echo "$OSSRH_GPG_SECRET_KEY" gpg --batch --import
 
-      - name: Get lastest version and update based on previous commits
-        run: ./bump_version.sh
-
       - name: Publish to Maven Central
         run: |
           mvn \
