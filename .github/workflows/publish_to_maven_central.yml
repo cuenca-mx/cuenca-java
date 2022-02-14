@@ -68,6 +68,12 @@ jobs:
           echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" gpg --batch --import |
           gpg --list-secret-keys --keyid-format LONG
 
+      - id: install-secret-key
+        name: Install gpg secret key
+        run: |
+          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
+          gpg --list-secret-keys --keyid-format LONG
+
       - name: List keys
         run: gpg -K
 
@@ -79,7 +85,7 @@ jobs:
           -Dgpg.passphrase-OSSRH_GPG_SECRET_KEY_PASSWORD \
           -DskipTests \
           -Prelease \
-          deploy
+          clean deploy
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
