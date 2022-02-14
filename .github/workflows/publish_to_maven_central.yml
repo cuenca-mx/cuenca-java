@@ -32,7 +32,6 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Run tests
-        working-directory: 'string-array-utils'
         run: |
           mvn \
           --batch-mode \
@@ -68,11 +67,9 @@ jobs:
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
 
       - name: Get lastest version and update based on previous commits
-        working-directory: 'string-array-utils'
         run: ./bump_version.sh
 
       - name: Publish to Maven Central
-        working-directory: 'string-array-utils'
         run: |
           mvn \
           --no-transfer-progress \
