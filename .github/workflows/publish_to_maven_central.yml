@@ -70,6 +70,7 @@ jobs:
         run: gpg -K
 
       - name: Import GPG Key
+        id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v4
         with:
           gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
