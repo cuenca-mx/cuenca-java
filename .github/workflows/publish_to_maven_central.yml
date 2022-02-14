@@ -55,6 +55,9 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USER_NAME
           server-password: MAVEN_PASSWORD
+          gpg-private-key: OSSRH_GPG_SECRET_KEY
+          gpg-passphrase: OSSRH_GPG_SECRET_KEY_PASSWORD
+
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -62,9 +65,6 @@ jobs:
           path: ~/.m2
           key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
-      - name: Import GPG Key
-        uses: crazy-max/ghaction-import-gpg@v1
 
       - name: Get lastest version and update based on previous commits
         run: ./bump_version.sh
@@ -83,8 +83,6 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
           OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-          GPG_PRIVATE_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          PASSPHRASE: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
 
 
