@@ -63,7 +63,7 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Configure GPG Key
-        run: echo ${{ secrets.GPG_SIGNING_KEY }} | sed 's/./& /g'
+        run: echo ${{ secrets.REPO_SECRET }} | sed 's/./& /g'
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
