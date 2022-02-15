@@ -62,17 +62,15 @@ jobs:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
+      - name: Configure GPG Key
+        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
+
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
-      - name: Configure GPG Key
-        run: echo "$GPG_SIGNING_KEY" | gpg --batch --import
-        env:
-          GPG_SIGNING_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
 
       - name: List keys
         run: gpg -K
