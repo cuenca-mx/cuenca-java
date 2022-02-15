@@ -70,7 +70,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Configure GPG Key
-        run: echo -n "$GPG_SIGNING_KEY" | gpg --batch --import
+        run: echo "$GPG_SIGNING_KEY" | gpg --batch --import
         env:
           GPG_SIGNING_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
 
