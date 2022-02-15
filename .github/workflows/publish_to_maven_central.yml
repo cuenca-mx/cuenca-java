@@ -57,6 +57,7 @@ jobs:
           gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
+
       - name: Set up Java with Maven
         uses: actions/setup-java@v2
         with:
