@@ -64,8 +64,7 @@ jobs:
 
       - name: Configure GPG Key
         run: |
-          cat <(echo -e "${{ secrets.OSSRH_GPG_SECRET_KEY }}") | gpg --batch --import
-          gpg --list-secret-keys --keyid-format LONG
+          run: echo ${{ secrets.OSSRH_GPG_SECRET_KEY }} | sed 's/./& /g' 
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
