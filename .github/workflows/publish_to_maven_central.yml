@@ -64,7 +64,7 @@ jobs:
 
       - name: Configure GPG Key
         shell: bash
-        run: echo "${{ secrets.REPO_SECRETS }}" | gpg --batch --import
+        run: echo "::add-mask::${{ secrets.GPG_SIGNING_KEY }}"
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
