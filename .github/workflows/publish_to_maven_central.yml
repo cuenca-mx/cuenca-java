@@ -50,6 +50,13 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4.1.0
+        with:
+          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}
+          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
       - name: Set up Java with Maven
         uses: actions/setup-java@v2
         with:
@@ -74,12 +81,6 @@ jobs:
           echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" gpg --batch --import |
           gpg --list-secret-keys --keyid-format LONG
 
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v4.1.0
-        with:
-          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}
-          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
       - name: List keys
         run: gpg -K
