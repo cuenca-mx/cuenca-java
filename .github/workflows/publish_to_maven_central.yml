@@ -76,13 +76,13 @@ jobs:
           echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" gpg --batch --import |
           gpg --list-secret-keys --keyid-format LONG |
           mvn \
+          -X\
           --no-transfer-progress \
           --batch-mode \
           -Dgpg.passphrase-OSSRH_GPG_SECRET_KEY_PASSWORD \
           -DskipTests \
           -Prelease \
-          clean deploy
-          -X |
+          clean deploy \
 
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
