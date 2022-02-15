@@ -71,11 +71,12 @@ jobs:
 
       - name: Configure GPG Key
         run: |
-          echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" gpg --batch --import |
+          echo "${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}" gpg --batch --import |
           gpg --list-secret-keys --keyid-format LONG |
           echo "${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}" > private.asc |
           gpg --import --batch private.asc |
-          gpg --list-secret-keys --keyid-format LONG 
+          gpg --list-secret-keys --keyid-format LONG
+        shell: bash
 
 
       - name: List keys
