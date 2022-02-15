@@ -80,6 +80,7 @@ jobs:
           -DskipTests \
           -Prelease \
           clean deploy
+          -X
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
