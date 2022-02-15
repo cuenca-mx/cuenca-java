@@ -58,13 +58,9 @@ jobs:
           server-id: ossrh
           server-username: MAVEN_USER_NAME
           server-password: MAVEN_PASSWORD
-          gpg-private-key: OSSRH_GPG_SECRET_KEY
-          gpg-passphrase: OSSRH_GPG_SECRET_KEY_PASSWORD
         env:
-          MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
-          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-          OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY}}
+          MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
