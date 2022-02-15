@@ -50,25 +50,15 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Import GPG key
-        id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v4
-        with:
-          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-
       - name: Set up Java with Maven
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v1
         with:
-          java-version: '16'
-          distribution: 'temurin'
+          java-version: '11'
           server-id: ossrh
           server-username: MAVEN_USER_NAME
           server-password: MAVEN_PASSWORD
-        env:
-          MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
-          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+          gpg-private-key: OSSRH_GPG_SECRET_KEY
+          gpg-passphrase: OSSRH_GPG_SECRET_KEY_PASSWORD
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -97,7 +87,6 @@ jobs:
           -DskipTests \
           -Prelease \
           clean deploy \
-
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
