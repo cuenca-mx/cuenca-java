@@ -63,6 +63,7 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Configure GPG Key
+        shell: bash
         run: echo "${{ secrets.REPO_SECRETS }}" | gpg --batch --import
 
       - name: Cache Maven dependencies
