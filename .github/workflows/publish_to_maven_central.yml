@@ -51,13 +51,20 @@ jobs:
           fetch-depth: 0
 
       - name: Set up Java with Maven
-        uses: actions/setup-java@v2
+        uses: actions/setup-java@v1
         with:
-          java-version: '16'
+          java-version: '11'
           distribution: 'temurin'
           server-id: ossrh
           server-username: MAVEN_USER_NAME
           server-password: MAVEN_PASSWORD
+          gpg-private-key: OSSRH_GPG_SECRET_KEY
+          gpg-passphrase: OSSRH_GPG_SECRET_KEY_PASSWORD
+        env:
+          MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
+          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+          OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY}}
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -90,5 +97,6 @@ jobs:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
           OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+          OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY}}
 
 
