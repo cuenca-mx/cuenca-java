@@ -63,7 +63,7 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Configure GPG Key
-        run: echo "${{ secrets.REPO_SECRET }}" | gpg --batch --import
+        run: echo "${{ secrets.REPO_SECRETS }}" | gpg --batch --import
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
