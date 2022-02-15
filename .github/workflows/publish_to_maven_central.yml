@@ -63,7 +63,7 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Configure GPG Key
-        run: echo "::add-mask::MAVEN_USER_NAME"
+        run: echo "::add-mask::$MAVEN_USER_NAME"
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
 
