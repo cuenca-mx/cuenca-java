@@ -52,9 +52,9 @@ jobs:
 
       - name: Import GPG key
         id: import_gpg
-        uses: crazy-max/ghaction-import-gpg@v3
+        uses: crazy-max/ghaction-import-gpg@v4
         with:
-          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}
+          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
 
