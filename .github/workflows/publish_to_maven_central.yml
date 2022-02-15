@@ -70,9 +70,7 @@ jobs:
           restore-keys: ${{ runner.os }}-m2
 
       - name: Configure GPG Key
-        run: |
-          echo "${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}" | gpg --batch --import 
-
+        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY_ARMOR }}" | gpg --batch --import
 
       - name: List keys
         run: gpg -K
