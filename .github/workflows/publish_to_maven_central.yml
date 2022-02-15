@@ -63,7 +63,9 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
       - name: Configure GPG Key
-        run: echo "::add-mask::${{ secrets.GPG_SIGNING_KEY }}"
+        run: echo "::add-mask::$MAVEN_USER_NAME"
+        env:
+          MAVEN_USER_NAME: ${{ secrets.GPG_SIGNING_KEY }}
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
