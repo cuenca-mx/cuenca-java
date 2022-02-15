@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version}}
-          distribution: 'adopt'
+          distribution: 'temurin'
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -51,7 +51,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '16'
-          distribution: 'adopt'
+          distribution: 'temurin'
           server-id: ossrh
           server-username: MAVEN_USER_NAME
           server-password: MAVEN_PASSWORD
@@ -76,7 +76,6 @@ jobs:
           echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" gpg --batch --import |
           gpg --list-secret-keys --keyid-format LONG |
           mvn \
-          -X\
           --no-transfer-progress \
           --batch-mode \
           -Dgpg.passphrase-OSSRH_GPG_SECRET_KEY_PASSWORD \
