@@ -7,38 +7,7 @@ on:
     branches: [ main ]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-    # Release only if last commit message contains keyword 'PUBLISH' [not case-sensitive]
-    if: "contains(github.event.head_commit.message, 'PUBLISH')"
-    strategy:
-      matrix:
-        java-version: ['11', '16', '17']
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 11, 16 y 17
-        uses: actions/setup-java@v2
-        with:
-          java-version: ${{ matrix.java-version}}
-          distribution: 'adopt'
-
-      - name: Cache Maven dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Run tests
-        run: |
-          mvn \
-          --batch-mode \
-          clean test
-
   publish:
-    needs: test
     name: Bump maven version, release on Github and Maven Central
     runs-on: ubuntu-latest
     permissions:
