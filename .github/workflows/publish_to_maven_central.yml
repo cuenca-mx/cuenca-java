@@ -70,9 +70,6 @@ jobs:
           gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
-      - name: List keys
-        run: gpg -K
-
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
@@ -80,9 +77,11 @@ jobs:
           key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
+      - name: List keys
+        run: gpg -K | cat /home/runner/.m2/settings.xml
+
       - name: Publish to Maven Central
         run: |
-          cat /home/runner/.m2/settings.xml |
           mvn \
           --no-transfer-progress \
           --batch-mode \
