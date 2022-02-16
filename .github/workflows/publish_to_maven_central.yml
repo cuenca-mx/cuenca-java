@@ -61,8 +61,6 @@ jobs:
 
       - name: Configure GPG Key
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --bat ch --import
-        env:
-          HOLA_MUNDO: ${{ secrets.HOLA_MUNDO}}
 
       - name: Import GPG key
         id: import_gpg
@@ -73,6 +71,8 @@ jobs:
 
       - name: List keys
         run: gpg -K | cat /home/runner/.m2/settings.xml
+        env:
+          HOLA_MUNDO: ${{ secrets.HOLA_MUNDO}}
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
