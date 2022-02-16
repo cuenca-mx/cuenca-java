@@ -143,7 +143,7 @@
                 <configuration>
                     <gpgArguments>
                         <arg>--pinentry-mode</arg>
-                        <arg>allow-loopback-pinentry</arg>
+                        <arg>allow-loopback</arg>
                     </gpgArguments>
                 </configuration>
             </plugin>
