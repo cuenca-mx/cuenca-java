@@ -49,33 +49,26 @@ jobs:
         uses: actions/checkout@v2
         with:
           fetch-depth: 0
-
       - name: Cache Maven dependencies
         uses: actions/cache@v2
         with:
           path: ~/.m2
           key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
-
       - name: Set up Java with Maven
         uses: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
-          server-id: ossrhs
+          server-id: ossrh
           server-username: MAVEN_USER_NAME
           server-password: MAVEN_PASSWORD
-
       - name: Import GPG key
         id: import_gpg
         uses: crazy-max/ghaction-import-gpg@v4
         with:
           gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-
-      - name: List keys
-        run: gpg -K
-
       - name: Publish to Maven Central
         run: |
           mvn \
@@ -89,4 +82,3 @@ jobs:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
           OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-          OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
