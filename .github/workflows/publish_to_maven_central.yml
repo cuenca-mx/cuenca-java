@@ -50,14 +50,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      -name: Set up Java with Maven
+      - name: Set up Java with Maven
         usese: actions/setup-java@v2
         with:
           java-version: '11'
           distribution: 'adopt'
           server-id: ossrh
-          server-username: ${{ secrets.MAVEN_USER_NAME}}
-          server-password: ${{ secrets.MAVEN_PASSWORD}}
+          server-username: ${{ secrets.HOLA_MUNDO}}
+          server-password: ${{ secrets.HOLA_MUNDO}}
 
       - name: Configure GPG Key
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
