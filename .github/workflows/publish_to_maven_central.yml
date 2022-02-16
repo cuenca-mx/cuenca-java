@@ -56,11 +56,13 @@ jobs:
           java-version: '11'
           distribution: 'adopt'
           server-id: ossrh
-          server-username: ${ secrets.HOLA_MUNDO}
-          server-password: ${ secrets.HOLA_MUNDO}
+          server-username: HOLA_MUNDO
+          server-password: HOLA_MUNDO
 
       - name: Configure GPG Key
-        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
+        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --bat ch --import
+        env:
+          HOLA_MUNDO: ${{ secrets.HOLA_MUNDO}}
 
       - name: Import GPG key
         id: import_gpg
