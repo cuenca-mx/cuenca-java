@@ -73,7 +73,7 @@ jobs:
       - name: List keys
         run: gpg -K | cat /home/runner/.m2/settings.xml
         env:
-          MAVEN_USER_NAME: ${{ secrets.HOLA_MUNDO}}
+          HOLA_MUNDO: ${{ secrets.HOLA_MUNDO}}
 
 
       - name: Cache Maven dependencies
