@@ -22,7 +22,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: ${{ matrix.java-version}}
-          distribution: 'temurin'
+          distribution: 'adopt'
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -54,7 +54,7 @@ jobs:
         uses: actions/setup-java@v2
         with:
           java-version: '11'
-          distribution: 'temurin'
+          distribution: 'adopt'
           server-id: ossrh
           server-username: ${{ secrets.MAVEN_USER_NAME }}
           server-password: ${{ secrets.MAVEN_PASSWORD }}
