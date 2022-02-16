@@ -65,6 +65,13 @@ jobs:
       - name: Configure GPG Key
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
 
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+
       - name: List keys
         run: gpg -K
 
