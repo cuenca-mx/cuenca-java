@@ -91,6 +91,12 @@ jobs:
           -DskipTests \
           -Prelease \
           clean deploy \
+
+        with:
+          server-id: ossrh
+          server-username: ${{ secrets.MAVEN_USER_NAME }}
+          server-password: ${{ secrets.MAVEN_PASSWORD }}
+
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME}}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD}}
