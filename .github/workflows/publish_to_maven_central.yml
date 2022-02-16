@@ -62,13 +62,9 @@ jobs:
         with:
           java-version: '11'
           distribution: 'adopt'
-          server-id: ossrh
+          server-id: ossrhs
           server-username: MAVEN_USER_NAME
           server-password: MAVEN_PASSWORD
-
-      - name: Configure GPG Key
-        run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
-
 
       - name: Import GPG key
         id: import_gpg
