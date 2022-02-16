@@ -64,6 +64,18 @@ jobs:
         with:
           servers: '[{"id": "ossrh", "username": "${MAVEN_USER_NAME}", "password": "${MAVEN_PASSWORD}"}]'
 
+      - name: Setup Maven settings.xml
+        uses: whelk-io/maven-settings-xml-action@v11
+        with:
+          servers: |
+            '[
+              {
+                "id": "artifactory",
+                "username": "${{secrets.MAVEN_USER_NAME}}",
+                "password": "${{secrets.MAVEN_PASSWORD}}"
+              }
+            ]'
+
       - name: Configure GPG Key
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
 
