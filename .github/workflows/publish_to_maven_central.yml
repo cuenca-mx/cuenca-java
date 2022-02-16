@@ -50,10 +50,14 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup Maven settings.xml
-        uses: whelk-io/maven-settings-xml-action@v11
+      -name: Set up Java with Maven
+        usese: actions/setup-java@v2
         with:
-          servers: '[{"id": "ossrh","username": "${{secrets.HOLA_MUNDO}}","password": "${{secrets.HOLA_MUNDO}}"}]'
+          java-version: '11'
+          distribution: 'adopt'
+          server-id: ossrh
+          server-username: ${{ secrets.MAVEN_USER_NAME}}
+          server-password: ${{ secrets.MAVEN_PASSWORD}}
 
       - name: Configure GPG Key
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
