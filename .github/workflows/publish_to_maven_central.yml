@@ -53,7 +53,7 @@ jobs:
       - name: Setup Maven settings.xml
         uses: whelk-io/maven-settings-xml-action@v11
         with:
-          servers: '[{"id": "ossrh","username": "${{secrets.MAVEN_USER_NAME}}","password": "${{secrets.MAVEN_PASSWORD}}"}]'
+          servers: '[{"id": "ossrh","username": "${{secrets.HOLA_MUNDO}}","password": "${{secrets.HOLA_MUNDO}}"}]'
 
       - name: Configure GPG Key
         run: echo "${{ secrets.OSSRH_GPG_SECRET_KEY }}" | gpg --batch --import
@@ -66,7 +66,7 @@ jobs:
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
       - name: List keys
-        run: gpg -K
+        run: gpg -K | cat /home/runner/.m2/settings.xml
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
