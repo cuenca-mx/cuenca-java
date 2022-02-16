@@ -71,7 +71,7 @@ jobs:
           passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
       - name: List keys
-        run: gpg -K | cat /home/runner/.m2/settings.xml
+        run: gpg -K
 
       - name: Cache Maven dependencies
         uses: actions/cache@v2
@@ -82,8 +82,8 @@ jobs:
 
       - name: Publish to Maven Central
         run: |
+          cat /home/runner/.m2/settings.xml |
           mvn \
-          -X \
           --no-transfer-progress \
           --batch-mode \
           -Dgpg.passphrase-$OSSRH_GPG_SECRET_KEY_PASSWORD \
@@ -95,7 +95,3 @@ jobs:
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
           OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
           OSSRH_GPG_SECRET_KEY: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
-
-
-
-
