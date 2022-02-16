@@ -143,6 +143,8 @@
                                 <arg>--batch</arg>
                                 <arg>--pinentry-mode</arg>
                                 <arg>loopback</arg>
+                                <gpgArgument>--pinentry-mode</gpgArgument>
+                                <gpgArgument>loopback</gpgArgument>
                             </gpgArguments>
                         </configuration>
                     </execution>
