@@ -43,7 +43,7 @@ jobs:
           -Dgpg.passphrase-$OSSRH_GPG_SECRET_KEY_PASSWORD \
           -DskipTests \
           -Prelease \
-          release
+          package
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
