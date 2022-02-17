@@ -47,6 +47,7 @@ jobs:
         env:
           OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
       - name: Publish to maven
+        if: startsWith(github.event.ref, 'refs/tags')
         run: |
           mvn \
           --no-transfer-progress \
