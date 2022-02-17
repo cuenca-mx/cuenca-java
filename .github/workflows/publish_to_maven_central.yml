@@ -43,13 +43,15 @@ jobs:
           -Dgpg.passphrase-$OSSRH_GPG_SECRET_KEY_PASSWORD \
           -DskipTests \
           -Prelease \
-        env:
-          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
-      - name:
-        run: clean deploy
+          release
         env:
           MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
           MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
 
-
+      - name: Publish to maven
+        run: mvn clean deploy
+        env:
+          MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
 
