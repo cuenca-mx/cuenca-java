@@ -1,0 +1,61 @@
+name: Build test with maven
+
+on:
+  push:
+
+jobs:
+  publish:
+    name: Bump maven version, release on Github and Maven Central
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+      - name: Set up Java with Maven
+        uses: actions/setup-java@v2
+        with:
+          java-version: '11'
+          distribution: 'adopt'
+          server-id: ossrh
+          server-username: MAVEN_USER_NAME
+          server-password: MAVEN_PASSWORD
+      - name: Import GPG key
+        id: import_gpg
+        uses: crazy-max/ghaction-import-gpg@v4
+        with:
+          gpg_private_key: ${{ secrets.OSSRH_GPG_SECRET_KEY }}
+          passphrase: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+      - name: Generate jar
+        run: |
+          mvn \
+          --no-transfer-progress \
+          --batch-mode \
+          -Dgpg.passphrase-$OSSRH_GPG_SECRET_KEY_PASSWORD \
+          -DskipTests \
+          -Prelease \
+          package
+        env:
+          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+      - name: Publish to maven
+        if: startsWith(github.event.ref, 'refs/tags')
+        run: |
+          mvn \
+          --no-transfer-progress \
+          --batch-mode \
+          -Dgpg.passphrase-$OSSRH_GPG_SECRET_KEY_PASSWORD \
+          clean deploy
+        env:
+          OSSRH_GPG_SECRET_KEY_PASSWORD: ${{ secrets.OSSRH_GPG_SECRET_KEY_PASSWORD }}
+          MAVEN_USER_NAME: ${{ secrets.MAVEN_USER_NAME }}
+          MAVEN_PASSWORD: ${{ secrets.MAVEN_PASSWORD }}
+

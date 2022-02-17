@@ -1,9 +1,19 @@
 # Cuenca-Java
 
+##Rut test
+To run test you need to install maven
+  ```
+  mvn test
+ ```
 
-## Install
+##Install maven
+  ```
+   brew install maven
+ ```
 
-# Gradle
+# How to integrate it?
+
+## Gradle
 
 1. Add the JitPack repository to your build file. Add it in your root build.gradle at the end of repositories:
 
@@ -27,7 +37,7 @@ dependencies {
   import com.cuenca.CuencaClient;
 ```
 
-# Maven
+## Maven
 
 1. Add the JitPack repository to your build file
 ```
@@ -52,7 +62,7 @@ dependencies {
   import com.cuenca.CuencaClient;
 ```
 
-Available methods
+#Available methods
 1. GET
  ```
 Params: 
@@ -92,3 +102,4 @@ Retorno:
 Returns an HttpResponse in string format.
 public HttpResponse<String> delete(String endpoint)
 ```
+

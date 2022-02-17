@@ -6,7 +6,7 @@
 
     <groupId>com.cuenca</groupId>
     <artifactId>CuencaJava</artifactId>
-    <version>1.0.2</version>
+    <version>1.0-SNAPSHOT</version>
 
     <name>CuencaJava</name>
     <description>Library to connect to Cuenca</description>
@@ -38,8 +38,8 @@
 
     <developers>
         <developer>
-            <name>Cuenca Devs</name>
-            <email>dev@cuenca.com</email>
+            <name>Miguel Acosta</name>
+            <email>miguel@cuenca.com</email>
             <organization>com.cuenca</organization>
             <organizationUrl>http://github.com/cuenca-mx/</organizationUrl>
         </developer>
@@ -86,20 +86,13 @@
             <plugin>
                 <groupId>org.sonatype.plugins</groupId>
                 <artifactId>nexus-staging-maven-plugin</artifactId>
-                <version>1.6.8</version>
+                <version>1.6.7</version>
                 <extensions>true</extensions>
                 <configuration>
                     <serverId>ossrh</serverId>
                     <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
                 </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>com.thoughtworks.xstream</groupId>
-                        <artifactId>xstream</artifactId>
-                        <version>1.4.15</version> <!-- apparently this needs to be exactly this version -->
-                    </dependency>
-                </dependencies>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -117,7 +110,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>3.3.0</version>
+                <version>2.9.1</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -130,7 +123,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-gpg-plugin</artifactId>
-                <version>3.0.1</version>
+                <version>1.5</version>
                 <executions>
                     <execution>
                         <id>sign-artifacts</id>
@@ -138,17 +131,19 @@
                         <goals>
                             <goal>sign</goal>
                         </goals>
-                        <configuration>
-                            <gpgArguments>
-                                <arg>--batch</arg>
-                                <arg>--pinentry-mode</arg>
-                                <arg>loopback</arg>
-                                <gpgArgument>--pinentry-mode</gpgArgument>
-                                <gpgArgument>loopback</gpgArgument>
-                            </gpgArguments>
-                        </configuration>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.sonatype.plugins</groupId>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <version>1.6.7</version>
+                <extensions>true</extensions>
+                <configuration>
+                    <serverId>ossrh</serverId>
+                    <nexusUrl>https://s01.oss.sonatype.org/</nexusUrl>
+                    <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                </configuration>
             </plugin>
         </plugins>
     </build>
